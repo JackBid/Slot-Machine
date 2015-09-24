@@ -27,12 +27,29 @@ $(document).ready(function(){
 		$("#slot-3").html(slot3);
 	}
 
+	function allRandomSlots(){
+		var arr = [pickRandomProperty(icons), pickRandomProperty(icons), pickRandomProperty(icons)];
+		changeSlots(icons[arr[0]], icons[arr[1]], icons[arr[2]]);
+	}
+
 	
 	changeSlots(icons.big_win, icons.big_win, icons.big_win);
 
+	function spin(){
+		var counter = 0;
+		function timer(){
+			allRandomSlots();
+			counter++;
+			if(counter >= 15){
+				clearInterval(interval);
+			}
+		}
+		var interval = setInterval(timer, 100);
+	}
+
+
 	$("button").click(function(){
-		var arr = [pickRandomProperty(icons), pickRandomProperty(icons), pickRandomProperty(icons)];
-		changeSlots(icons[arr[0]], icons[arr[1]], icons[arr[2]]);
+		spin();
 	});
 
 });
