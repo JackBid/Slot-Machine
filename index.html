@@ -16,7 +16,7 @@
 	<link rel="stylesheet" type="text/css" href="styles/style.css">
 </head>
 <body>
-	<h1>Slot Machine</h1>
+	<h1 class="text-primary">Slot Machine</h1>
 	<p>A slot machine app</p>
 	<div class="panel panel-default">
 	  <div class="panel-body">
@@ -32,10 +32,86 @@
 		    </div>
 		</div>
 
-	    <button>Spin</button>
+	    <button class="btn btn-primary">Spin</button>
+
+	   	<h3 class="points">Points: <span id="score">0</span></h3>
 
 	  </div>
 	</div>
+
+	<div class="tableContainer">
+
+	<table class="table table1">
+	  	<thead>
+	  		<tr>
+		  		<th>First Draw</th>
+		  		<th>Second Draw</th>
+		  		<th>Thrid Draw</th>
+		  		<th>Points</th>
+	  		</tr>
+	  	</thead>
+	  	<tbody>
+	  		<tr>
+	  			<td><img src='assets/images/icon_big_win.png' alt='7' height='60' width='60'></td>
+	  			<td><img src='assets/images/icon_big_win.png' alt='7' height='60' width='60'></td>
+	  			<td><img src='assets/images/icon_big_win.png' alt='7' height='60' width='60'></td>
+	  			<td>1000</td>
+	  		</tr>
+	  		<tr>
+	  			<td><img src='assets/images/icon_7.png' alt='7' height='60' width='60'></td>
+	  			<td><img src='assets/images/icon_7.png' alt='7' height='60' width='60'></td>
+	  			<td><img src='assets/images/icon_7.png' alt='7' height='60' width='60'></td>
+	  			<td>750</td>
+	  		</tr>
+	  		<tr>
+	  			<td><img src='assets/images/icon_bar.png' alt='7' height='60' width='60'></td>
+	  			<td><img src='assets/images/icon_bar.png' alt='7' height='60' width='60'></td>
+	  			<td><img src='assets/images/icon_bar.png' alt='7' height='60' width='60'></td>
+	  			<td>600</td>
+	  		</tr>
+	  		<tr>
+	  			<td><img src='assets/images/icon_melon.png' alt='7' height='60' width='60'></td>
+	  			<td><img src='assets/images/icon_melon.png' alt='7' height='60' width='60'></td>
+	  			<td><img src='assets/images/icon_melon.png' alt='7' height='60' width='60'></td>
+	  			<td>300</td>
+	  		</tr>
+	  		<tr>
+	  			<td><img src='assets/images/icon_orange.png' alt='7' height='60' width='60'></td>
+	  			<td><img src='assets/images/icon_orange.png' alt='7' height='60' width='60'></td>
+	  			<td><img src='assets/images/icon_orange.png' alt='7' height='60' width='60'></td>
+	  			<td>200</td>
+	  		</tr>
+	  		<tr>
+	  			<td><img src='assets/images/icon_bananas.png' alt='7' height='60' width='60'></td>
+	  			<td><img src='assets/images/icon_bananas.png' alt='7' height='60' width='60'></td>
+	  			<td><img src='assets/images/icon_bananas.png' alt='7' height='60' width='60'></td>
+	  			<td>100</td>
+	  		</tr>
+	  	</tbody>
+	  </table>
+
+	  <table class="table table2">
+	  	
+	  	<tbody>
+	  		<tr>
+	  			<td><img src='assets/images/icon_cherries.png' alt='7' height='60' width='60'></td>
+	  			<td>X1</td>
+	  			<td>50</td>
+	  		</tr>
+	  		<tr>
+	  			<td><img src='assets/images/icon_cherries.png' alt='7' height='60' width='60'></td>
+	  			<td>X2</td>
+	  			<td>100</td>
+	  		</tr>
+	  		<tr>
+	  			<td><img src='assets/images/icon_cherries.png' alt='7' height='60' width='60'></td>
+	  			<td>X3</td>
+	  			<td>150</td>
+	  		</tr>
+	  	</tbody>
+	</table>
+</div>
+
 
 	<footer>&copy Jack Biddlecombe 2015</footer>
 </body>

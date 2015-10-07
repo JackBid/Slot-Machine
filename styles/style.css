@@ -1,19 +1,41 @@
 body {
-	width: 800px;
+	width: 50%;
 	margin: auto;
 	text-align: center;
 }
 .slot {
 	margin: auto;
-	width: 150px;
-	height: 150px;	
+	
 	font-size: 5em;
 	text-align: center;
 }
 
 .slot img {
-	border: 1px solid #333;
+	width: 120px;
+	height: 120px;	
 }
 button {
 	margin: 10px;
+}
+.tableContainer {
+	width: 600px;
+	margin: auto;
+}
+.table {
+	width: 300px;
+	margin: auto;
+	text-align: center;
+}
+.table1 {
+	float: left;
+}
+.table2 {
+	margin-top: 70px; 
+	float: right;
+}
+th{
+	text-align: center;
+}
+.table tbody tr td{
+	vertical-align: middle;
 }

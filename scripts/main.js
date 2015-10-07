@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 	var icons = {
-		seven: "<img src='assets/images/icon_7.png' alt='7' height='150' width='150'>",
+		seven: "<img src='assets/images/icon_7.png' alt='seven' height='150' width='150'>",
 		bananas: "<img src='assets/images/icon_bananas.png' alt='bananas' height='150' width='150'>",
 		bar: "<img src='assets/images/icon_bar.png' alt='bar' height='150' width='150'>",
 		big_win: "<img src='assets/images/icon_big_win.png' alt='big win' height='150' width='150'>",
@@ -15,6 +15,8 @@ $(document).ready(function(){
 	var slots = [ {html: $("#slot-1"), hasSpun: false}, {html: $("#slot-2"), hasSpun: false}, {html: $("#slot-3"), hasSpun: false}];
 
 	var isSpinning = false;
+	var score = 0;
+	var prev;
 
 	function pickRandomProperty(obj) {
     	var result;
@@ -30,9 +32,13 @@ $(document).ready(function(){
     	var randNumber = Math.round(Math.random()*100);
     		
     	for(var i=0; i<fruits.length;i++){  		
-    		if(randNumber >= total && randNumber <= total+fruits[i][1])
-    			return icons[fruits[i][0]];
-    		total+=fruits[i][1];
+    		if(fruits[i]){
+	    		if(randNumber >= total && randNumber <= total+fruits[i][1]){
+	    			return icons[fruits[i][0]];
+	    		}
+    		
+    			total+=fruits[i][1];
+			}
     	}
 	}
 
@@ -62,20 +68,45 @@ $(document).ready(function(){
 				}
 			}
 			counter++;
-
+			
 			// Change slots at different times
 			if(counter === 40){
 				slots[2].hasSpun = true;
-				changeSlot(slots[2].html, pickSlot([["plum", 25], ["lemon", 20], ["cherries", 10], ["bananas", 10], ["orange", 10], ["melon", 10], ["bar", 7], ["seven", 5], ["big_win", 3]]));
+
+				prev = slots[1].html.contents().attr("alt");
+				
+				if(prev === "plum" || prev === "lemon" || prev === "cherries"){
+					changeSlot(slots[2].html, pickSlot([["plum", 20], ["lemon", 20], ["cherries", 20], ["bananas", 10] ["orange", 10], ["melon", 5], ["bar", 5], ["seven", 5], ["big_win", 5]]));
+				}else if(prev === "bananas" || prev === "orange" || prev === "melon"){
+					changeSlot(slots[2].html, pickSlot([["plum", 5], ["lemon", 5], ["cherries", 5], ["bananas", 20] ["orange", 20], ["melon", 20], ["bar", 10], ["seven", 10], ["big_win", 5]]));
+				}else if(prev === "bar" || prev === "seven" || prev === "big win"){
+					changeSlot(slots[2].html, pickSlot([["plum", 5], ["lemon", 5], ["cherries", 5], ["bananas", 5] ["orange", 10], ["melon", 10], ["bar", 20], ["seven", 20], ["big_win", 20]]));
+				}else{
+					console.log("error");
+				}
+				
+				
 				clearInterval(interval);
 				isSpinning = false;
 				checkWin();
 			}else if(counter === 30){
 				slots[1].hasSpun = true;
-				changeSlot(slots[1].html, pickSlot([["plum", 25], ["lemon", 20], ["cherries", 10], ["bananas", 10], ["orange", 10], ["melon", 10], ["bar", 7], ["seven", 5], ["big_win", 3]]));
+				prev = slots[0].html.contents().attr("alt");
+				
+				if(prev === "plum" || prev === "lemon" || prev === "cherries"){
+					changeSlot(slots[1].html, pickSlot([["plum", 20], ["lemon", 20], ["cherries", 20], ["bananas", 10] ["orange", 10], ["melon", 5], ["bar", 5], ["seven", 5], ["big_win", 5]]));
+				}else if(prev === "bananas" || prev === "orange" || prev === "melon"){
+					changeSlot(slots[1].html, pickSlot([["plum", 5], ["lemon", 5], ["cherries", 5], ["bananas", 20] ["orange", 20], ["melon", 20], ["bar", 10], ["seven", 10], ["big_win", 5]]));
+				}else if(prev === "bar" || prev === "seven" || prev === "big win"){
+					changeSlot(slots[1].html, pickSlot([["plum", 5], ["lemon", 5], ["cherries", 5], ["bananas", 5] ["orange", 10], ["melon", 10], ["bar", 20], ["seven", 20], ["big_win", 20]]));
+				}else{
+					console.log("error");
+				}
+
+				
 			}else if(counter === 20){
 				slots[0].hasSpun = true;
-				changeSlot(slots[0].html, pickSlot([["plum", 25], ["lemon", 20], ["cherries", 10], ["bananas", 10], ["orange", 10], ["melon", 10], ["bar", 7], ["seven", 5], ["big_win", 3]]));
+				changeSlot(slots[0].html, pickSlot([["plum", 20], ["lemon", 10], ["cherries", 15], ["bananas", 10], ["orange", 10], ["melon", 10], ["bar", 10], ["seven", 10], ["big_win", 5]]));
 			}
 		}
 		var interval = setInterval(timer, 75);
@@ -83,17 +114,42 @@ $(document).ready(function(){
 			slots[slot].hasSpun = false;
 	}
 
+	function updateScore(increment){
+		score += increment;
+		$("#score").html(score);
+	}
+
 	function checkWin(){
+
 		var first = slots[0].html.contents().attr("alt");
 		var second = slots[1].html.contents().attr("alt");
 		var third = slots[2].html.contents().attr("alt");
 
+	
 		if(first === second && second === third){
-			console.log("3 matches!");
+			if(first === "big win"){
+				updateScore(1000);
+			}else if(first === "seven"){
+				updateScore(750);
+			}else if(first === "bar"){
+				updateScore(600);
+			}else if(first === "melon"){
+				updateScore(300);
+			}else if(first === "orange"){
+				updateScore(200);
+			}else if(first === "bananas"){
+				updateScore(100);
+			}else if(first === "cherries"){
+				updateScore(150);
+			}
 		}else if(first === second || second === third || first === third){
-			console.log("2 matches");
+			if(first === "cherries" || second === "cherries" || third === "cherries"){
+				updateScore(100)
+			}
 		}else{
-			console.log("no matches");
+			if(first === "cherries" || second === "cherries" || third === "cherries"){
+				updateScore(50);
+			}
 		}
 	}
 
